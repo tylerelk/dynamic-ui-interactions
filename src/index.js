@@ -1,22 +1,24 @@
-import './style.css';
+import "./style.css";
 
-const root = document.getElementById('root-div');
+const root = document.getElementById("root-div");
 
 function renderPage() {
-    const lists = document.querySelectorAll('ul');
-    const items = document.querySelectorAll('li');
+  const menu = document.querySelector("ul");
+  const items = document.querySelectorAll("li");
 
-    lists.forEach(list => {
-        let label = document.createElement('h4');
-        label.textContent = `Level: ${list.classList[0]}`;
-        list.insertBefore(label, list.firstChild);
+  function openMenu() {
+    items.forEach((item) => {
+      item.style.top = `${5 * Array.from(items).indexOf(item)}rem`;
     });
-
+  };
+  function closeMenu() {
     items.forEach(item => {
-        let label = document.createElement('h4');
-        label.textContent = `Level: ${item.classList[0]}`;
-        item.insertBefore(label, item.firstChild);
-    });
+        item.style.top = '0';
+    })
+  }
+
+  menu.addEventListener("mouseenter", () => setTimeout(openMenu), 10);
+  menu.addEventListener('mouseleave', () => setTimeout(closeMenu, 10));
 }
 
-root.appendChild(renderPage());
+renderPage();
